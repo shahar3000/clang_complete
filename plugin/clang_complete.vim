@@ -35,6 +35,10 @@ elseif has('python3')
 endif
 
 function! s:ClangCompleteInit()
+  " close preview window after selecting a completion value
+  au CursorMovedI * if pumvisible() == 0|pclose|endif
+  au InsertLeave * if pumvisible() == 0|pclose|endif
+
   let l:bufname = bufname("%")
   if l:bufname == ''
     return
